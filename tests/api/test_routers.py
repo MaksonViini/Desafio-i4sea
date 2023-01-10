@@ -12,7 +12,7 @@ def test_forecast_stations_id_27() -> None:
     }
 
     response = httpx.post(
-        "http://localhost:8080/api/forecast_records", json=data)
+        "http://localhost:8080/api/forecast_records", json=data, timeout=10000)
 
     body = response.json()[0]
 
@@ -33,7 +33,7 @@ def test_get_stations_id() -> None:
     }
 
     response = httpx.post(
-        "http://localhost:8080/api/stations", json=data)
+        "http://localhost:8080/api/stations", json=data, timeout=10000)
 
     body = response.json()
 

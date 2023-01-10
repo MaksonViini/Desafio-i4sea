@@ -1,9 +1,11 @@
 
 def stations_id_list():
+
     return [6, 27, 16, 73, 74, 126, 125, 210, 211, 224, 259, 258, 257]
 
 
 def api_forecast_content():
+
     return {
         "station_id": 27,
         "station_name": "POB",
@@ -27,6 +29,7 @@ def api_forecast_content():
 
 
 def api_forecast_new_content():
+
     return (
 
         {
@@ -73,6 +76,15 @@ def api_forecast_new_content():
 
 
 def get_my_localhost_connection():
+
     return {
         "localcon": "Collection(Database(MongoClient(host=['localhost:27017'], document_class=dict, tz_aware=False, connect=True), 'test'), 'my_collection')"
     }
+
+
+def get_enter_api_data():
+    
+    return {
+	"region": "1711",
+	"environmental_type": "weather"
+}

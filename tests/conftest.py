@@ -13,6 +13,6 @@ def client() -> Generator:
         yield c
 
 @pytest.fixture(scope="function")
-def db():
+def db() -> Generator:
     with MongoClient(DATABASE_URL) as c:
         yield c

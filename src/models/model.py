@@ -1,4 +1,4 @@
-from pydantic import BaseModel, ConstrainedFloat
+from pydantic import BaseModel, ConstrainedFloat, root_validator
 
 
 class Latitude(ConstrainedFloat):
@@ -33,6 +33,15 @@ class ForecastEnvironmental(BaseModel):
 class ForecastData(BaseModel):
     region: str
     environmental_type: str
+
+    @root_validator(pre=True)
+    def check_data(cls, values) -> dict:
+
+        if not any(map(str.isdigit, values["region"])) and any(
+            map(str.isdigit, values["region"])
+        ):
+            raise TypeError("Object not valid")
+        return values
 
     class Config:
         orm_mode = True
