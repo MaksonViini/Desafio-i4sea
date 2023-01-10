@@ -1,22 +1,41 @@
 import httpx
 import pytest
+from fastapi.testclient import TestClient
+from tests.utils.content import stations_id_list
 
-def test_forecast_records():
-    url = "http://localhost:8080/api/forecast_records"
+
+def test_forecast_stations_id_27() -> None:
+
+    data = {
+        "region": "1711",
+        "environmental_type": "weather"
+    }
+
+    response = httpx.post(
+        "http://localhost:8080/api/forecast_records", json=data)
+
+    body = response.json()[0]
+
+    assert response.status_code == 200
+    assert body.get("station_id") == 27
 
 
-def test_forecast_stations_id_27():
-    response = httpx.post("/stations")
+def test_get_records(client: TestClient) -> None:
+
+    response = client.get("api/records")
+    assert response.status_code == 200
+
+
+def test_get_stations_id() -> None:
+    data = {
+        "region": "1711",
+        "environmental_type": "weather"
+    }
+
+    response = httpx.post(
+        "http://localhost:8080/api/stations", json=data)
+
     body = response.json()
 
-    assert body["id"] == []
-
-
-def test_create_propose():
-    url = 'http://localhost:8080/api/propose'
-    data = {
-        "cnpj": "03215360000107",
-        "email": "maksonvinicio7@unifei.edu.br"
-    }
-    response = httpx.post(url, json=data, timeout=10000000)
     assert response.status_code == 200
+    assert body.get("id") == stations_id_list()

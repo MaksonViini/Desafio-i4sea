@@ -25,7 +25,7 @@ class Basic:
 
     @router.get("/status")
     async def get_status():
-        return {"Status": "Ok!"}, 200
+        return {"Status": "Ok!"}
 
 
 class Records:
