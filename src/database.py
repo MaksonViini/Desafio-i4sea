@@ -6,9 +6,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-# DATABASE_URL = f"""mongodb://root:{os.getenv('DB_PASSWORD')}@{os.getenv('DB_HOST')}:
-#                                                         {os.getenv('DB_PORT')}/"""
-DATABASE_URL = 'mongodb://root:example@localhost:27017/'
+DATABASE_URL = f"""mongodb://root:{os.getenv('DB_PASSWORD')}@{os.getenv('DB_HOST')}:27017/"""
 
 client = MongoClient(DATABASE_URL)
 

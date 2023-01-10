@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from starlette.responses import RedirectResponse
 
-from ..schemas.schema import forecast_environmental_serializer, data_serializer
+from ..schemas.schema import data_serializer
 from ..models.model import ForecastEnvironmental, ForecastData, ForecastStation
 
 

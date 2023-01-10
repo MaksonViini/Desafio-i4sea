@@ -2,6 +2,7 @@
 
 CURL='/usr/bin/curl -X POST'
 
+# Realiza a chamada na API para buscar todas as estações
 data=$(curl -d '{
 	"region": "1711",
 	"environmental_type": "weather"
@@ -15,6 +16,7 @@ array=($(echo $data | grep -o  '[0-9]\+'))
 
 len=${#array[@]}
 i=0
+count_request=0
 
 while [ $i -lt $len ];
 do
@@ -28,39 +30,46 @@ var='{
 
 echo $var
 
-# status_code=$(curl -d "$var" -H "Content-Type: application/json" -X POST http://127.0.0.1:8080/api/forecast_records --write-out %{http_code} --silent --output /dev/null )
 
-# Verifica se a resposta http e sucesso, se nao tenta novamente fazer a requisicao
-# while true
-# do
-#     if [[ "$status_code" -eq 200 ]] ; then
-#         echo "Status code is $status_code - Success Request"
-#         break
-#     else
-#         echo "Status code is $status_code - Fail Request and trying again"
-#         status_code=$(curl -d "$var" -H "Content-Type: application/json" -X POST http://127.0.0.1:8080/api/forecast_records --write-out %{http_code} --silent --output /dev/null )
-#     fi
-#     sleep 10
-# done
+status_code=$(curl -d "$var" -H "Content-Type: application/json" -X POST http://127.0.0.1:8080/api/forecast_records --write-out %{http_code} --silent --output /dev/null )
+
+
+#Verifica se a resposta http e sucesso, se nao tenta novamente fazer a requisição
+while true
+do
+    if [[ "$status_code" -eq 200 || count_request -eq 3]] ; then
+        echo "Status code is $status_code - Success Request"
+        let count_request=0
+        break
+    else
+        echo "Status code is $status_code - Fail Request and trying again"
+        status_code=$(curl -d "$var" -H "Content-Type: application/json" -X POST http://127.0.0.1:8080/api/forecast_records --write-out %{http_code} --silent --output /dev/null )
+        let count_request++
+    fi
+    sleep 10
+done
 
 
 let i++
 
 done
 
-# # Entra no diretorio
-# cd src/services/output/ 
+hoje=$(date +'%d-%m-%Y')
 
-# mkdir zip
+# Entra no diretório
+cd src/services/output/ 
 
-# #compactada e move para a pasta zip
-# zip -r teste.zip . 
-# mv teste.zip zip/
+mkdir zip
 
-# cd ..
-# # Executa a funcao para envio do zip para cloud
-# python3 utils.py
+#compactada e move para a pasta zip
+zip -r $hoje.zip . 
+mv $hoje.zip zip/
 
-# cd output/
+cd ..
+# Executa a função para envio do zip para cloud
+python3 utils.py
 
-# rm -rf zip *.txt
+cd output/
+
+# limpa o diretório
+rm -rf zip *.json

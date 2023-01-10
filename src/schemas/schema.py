@@ -2,7 +2,7 @@
 def forecast_environmental_serializer(data) -> dict:
 
     return {
-        "station_id": data["station_id"],
+        "station_id": int(data["station_id"]),
         "station_name": data["station_name"],
         "station_depth": data["station_depth"],
         "station_depth_unit": data["station_depth_unit"],

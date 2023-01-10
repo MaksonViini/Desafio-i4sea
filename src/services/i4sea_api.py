@@ -9,19 +9,13 @@ load_dotenv()
 
 def get_auth_token():
 
-    # credentials = {
-    #     "user": os.getenv('USER'),
-    #     "password": os.getenv('PASSWORD'),
-    #     "keep_connected": True
-    # }
-
     credentials = {
-        "user": "demo_backend_api",
-        "password": "Tmp1234",
+        "user": os.getenv('USERACCESS'),
+        "password": os.getenv('PASSWORD'),
         "keep_connected": True
     }
-
-    url_token = "https://i4cast-backend.i4sea.com/v1/auth/login"
+    
+    url_token = os.getenv('ENDPOINT_AUTH')
 
     return requests.post(url_token, json=credentials, timeout=100).json()
 
@@ -38,7 +32,7 @@ def get_stations(data):
 
     headers = get_headers()
 
-    url_stations = "https://i4cast-backend.i4sea.com/v1/atmocean/getStations"
+    url_stations = os.getenv('ENDPOINT_STATIONS')
 
     return requests.post(url_stations, json={"region": data["region"]}, timeout=100, headers=headers).json()
 
@@ -47,7 +41,7 @@ def get_forecast_environment_data(data):
 
     headers = get_headers()
 
-    url_region = "https://i4cast-backend.i4sea.com/v1/atmocean/getEnvironmentalData"
+    url_region = os.getenv('ENDPOINT_REGION')
 
     data_ = {
         "station_id":  data["station_id"],
