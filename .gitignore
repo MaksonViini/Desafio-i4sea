@@ -18,3 +18,5 @@ teste.ipynb
 *.hcl
 *.tfstate
 *.backup
+
+teste.py
