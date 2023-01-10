@@ -46,3 +46,11 @@ class ForecastData(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class ForecastStation(BaseModel):
+    region: str
+    environmental_type: str
+
+    class Config:
+        orm_mode = True

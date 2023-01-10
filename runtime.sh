@@ -3,7 +3,6 @@
 # Para executar em background
 # bash runtime.sh &
 
-
 if [ -d /logs/ ];
 then
     echo "Sim, existe!"
@@ -15,5 +14,5 @@ fi
 while true  
 do  
   bash parse_request.sh $1 $2 $2 >> logs/logs.txt
-  sleep 10  
+  sleep 900  
 done

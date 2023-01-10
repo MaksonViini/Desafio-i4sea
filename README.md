@@ -4,7 +4,7 @@
 A aplicação fornece endpoints para buscar registros na base de dados NoSQL, endpoint para criar um registro, para buscar a previsão de uma determinada station, de acordo com a região juntamente com o ambiente especificado, como por exemplo clima [weather]. E a possibilidade de buscar todos os id's de uma determinada station.
  
 - Execucao shell script
-  Para executar a aplicaç ao, é necessário executar o shell script `runtime.sh`, ele vai realizar a agenda de execução temporizada do script `parse_request.sh`, o qual vai executar a API por meio de um `curl`. Os parâmetros podem ser definidos separadamente no script `parse_request.sh` por meio da linha de comando `bash parse_request.sh 27 "1711" "weather"` por exemplo. O runtime também pode receber os parâmetros por meio da mesma definição.
+  Para executar a aplicação, é necessário executar o shell script `runtime.sh` como `bash runtime.sh &`, ele vai realizar a agenda de execução em background temporizada do script `parse_request.sh`, o qual vai executar a API por meio de um `curl`. Os parâmetros podem ser definidos separadamente no script `parse_request.sh` por meio da linha de comando `bash parse_request.sh 27 "1711" "weather"` por exemplo. O runtime também pode receber os parâmetros por meio da mesma definição.
 
    Executando, é salvo em um json na pasta output os dados, por meio do shell script todos os arquivos são compactados, adicionados à pasta zip, enviados a um bucket na Google Cloud e posteriormente excluídos, foi uma opção de projeto que optei para integrar mais a aplicação a um ambiente cloud, e evitar transferência de arquivos constantes e perdas, além da cloud prover segurança e de fácil acesso. A infraestrutura foi criada por meio de infra-as-a-code com terraform.
    

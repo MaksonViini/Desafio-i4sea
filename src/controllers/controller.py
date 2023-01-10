@@ -1,13 +1,13 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter
 from starlette.responses import RedirectResponse
 
 from ..schemas.schema import forecast_environmental_serializer, data_serializer
-from ..models.model import ForecastEnvironmental, ForecastData
+from ..models.model import ForecastEnvironmental, ForecastData, ForecastStation
 
 
 from ..database import collection
 
-from ..services.i4sea_api import get_stations, get_auth_token, get_forecast_environment_data
+from ..services.i4sea_api import get_stations, get_forecast_environment_data
 from ..services.utils import write_json
 
 
@@ -58,8 +58,11 @@ class ForecastRecords:
         return data_serializer(collection.find({"_id": _id.inserted_id}))
 
     @router.post("/stations")
-    async def get_stations_id(data: ForecastData):
+    async def get_stations_id(data: ForecastStation):
+
         response = get_stations(dict(data))
+
+        print(response)
 
         station_id_list = [station["station_id"] for station in response]
 
