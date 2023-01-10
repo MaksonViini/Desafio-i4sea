@@ -7,6 +7,7 @@ def test_model_forecast_data():
 
     values = get_enter_api_data()
     fd = ForecastData(
+        station_id=values["station_id"],
         region="1711", environmental_type=values["environmental_type"])
 
     assert fd.region == values["region"]

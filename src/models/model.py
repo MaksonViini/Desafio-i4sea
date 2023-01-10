@@ -31,6 +31,7 @@ class ForecastEnvironmental(BaseModel):
 
 
 class ForecastData(BaseModel):
+    station_id: int
     region: str
     environmental_type: str
 

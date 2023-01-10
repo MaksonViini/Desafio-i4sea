@@ -7,6 +7,7 @@ from tests.utils.content import stations_id_list
 def test_forecast_stations_id_27() -> None:
 
     data = {
+        "station_id": 27,
         "region": "1711",
         "environmental_type": "weather"
     }
@@ -28,6 +29,7 @@ def test_get_records(client: TestClient) -> None:
 
 def test_get_stations_id() -> None:
     data = {
+        "station_id": 27,
         "region": "1711",
         "environmental_type": "weather"
     }

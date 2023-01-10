@@ -14,6 +14,6 @@ fi
 
 while true  
 do  
-  bash parse_request.sh >> logs/logs.txt
+  bash parse_request.sh $1 $2 $2 >> logs/logs.txt
   sleep 10  
 done

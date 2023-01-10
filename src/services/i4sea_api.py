@@ -23,7 +23,7 @@ def get_auth_token():
 
     url_token = "https://i4cast-backend.i4sea.com/v1/auth/login"
 
-    return requests.post(url_token, json=credentials, timeout=10000000).json()
+    return requests.post(url_token, json=credentials, timeout=100).json()
 
 
 def get_headers():
@@ -40,7 +40,7 @@ def get_stations(data):
 
     url_stations = "https://i4cast-backend.i4sea.com/v1/atmocean/getStations"
 
-    return requests.post(url_stations, json={"region": data["region"]}, timeout=10000000, headers=headers).json()
+    return requests.post(url_stations, json={"region": data["region"]}, timeout=100, headers=headers).json()
 
 
 def get_forecast_environment_data(data):
@@ -49,11 +49,12 @@ def get_forecast_environment_data(data):
 
     url_region = "https://i4cast-backend.i4sea.com/v1/atmocean/getEnvironmentalData"
 
-    data = {
-        "station_id":  27,
+    data_ = {
+        "station_id":  data["station_id"],
         "region": data["region"],
         "data_type": "forecast",
         "environmental_type": data["environmental_type"]
     }
+    
 
-    return requests.post(url_region, json=data, timeout=10000000, headers=headers).json()
+    return requests.post(url_region, json=data_, timeout=100, headers=headers).json()

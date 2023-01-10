@@ -85,6 +85,7 @@ def get_my_localhost_connection():
 def get_enter_api_data():
     
     return {
+    "station_id": 27,
 	"region": "1711",
 	"environmental_type": "weather"
 }
