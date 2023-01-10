@@ -1,5 +1,6 @@
 anyio==3.6.2
 asttokens==2.2.1
+attrs==22.2.0
 autopep8==2.0.1
 backcall==0.2.0
 cachetools==5.2.1
@@ -11,6 +12,7 @@ debugpy==1.6.5
 decorator==5.1.1
 dnspython==2.2.1
 entrypoints==0.4
+exceptiongroup==1.1.0
 executing==1.2.0
 fastapi==0.89.0
 google-auth==2.15.0
@@ -20,6 +22,7 @@ h11==0.14.0
 httpcore==0.16.3
 httpx==0.23.3
 idna==3.4
+iniconfig==2.0.0
 ipykernel==6.20.1
 ipython==8.8.0
 jedi==0.18.2
@@ -34,6 +37,7 @@ parso==0.8.3
 pexpect==4.8.0
 pickleshare==0.7.5
 platformdirs==2.6.2
+pluggy==1.0.0
 prompt-toolkit==3.0.36
 psutil==5.9.4
 ptyprocess==0.7.0
@@ -44,6 +48,7 @@ pycodestyle==2.10.0
 pydantic==1.10.4
 Pygments==2.14.0
 pymongo==4.3.3
+pytest==7.2.0
 python-dateutil==2.8.2
 python-dotenv==0.21.0
 pyxdg==0.28

@@ -8,6 +8,7 @@ from ..models.model import ForecastEnvironmental, ForecastData
 from ..database import collection
 
 from ..services.i4sea_api import get_stations, get_auth_token, get_forecast_environment_data
+from ..services.utils import write_json
 
 
 router = APIRouter(
@@ -22,9 +23,9 @@ class Basic:
     async def main():
         return RedirectResponse(url="/docs/")
 
-    @router.get("/hello")
-    async def hello_world():
-        return {"hello": "ok"}, 200
+    @router.get("/status")
+    async def get_status():
+        return {"Status": "Ok!"}, 200
 
 
 class Records:
@@ -32,6 +33,10 @@ class Records:
     @router.get("/records")
     async def get_forecast_all():
         return data_serializer(collection.find())
+
+    # @router.get("/records_count/{id}")
+    # async def get_forecast_all(_id: int):
+    #     return data_serializer(collection.find({"station_id": _id}))
 
     @router.post("/records")
     async def create_forecast(data: ForecastEnvironmental):
@@ -47,4 +52,15 @@ class ForecastRecords:
         predict_environment = get_forecast_environment_data(dict(data))
         _data: ForecastEnvironmental = predict_environment
         _id = collection.insert_one(dict(_data))
+
+        write_json(dict(_data), dict(data))
+
         return data_serializer(collection.find({"_id": _id.inserted_id}))
+
+    @router.post("/stations")
+    async def get_stations_id(data: ForecastData):
+        response = get_stations(dict(data))
+
+        station_id_list = [station["station_id"] for station in response]
+
+        return {"id": station_id_list}
