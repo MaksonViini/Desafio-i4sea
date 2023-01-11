@@ -1,7 +1,6 @@
 version: "3.9"
 services:
   api_i4sea:
-    container_name: i4sea_services
     build:
       context: .
     volumes:
